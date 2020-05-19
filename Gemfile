@@ -84,7 +84,7 @@ def rails_upgrade?
   %w[1 true].include?(ENV['RAILS_UPGRADE'])
 end
 
-gem 'rails', rails_upgrade? ? '5.2.3' : '5.1.7'
+gem 'rails', rails_upgrade? ? '~> 5.2.4' : '5.1.7'
 
 gem 'pg', '~> 0.20.0'
 
@@ -101,7 +101,7 @@ gem 'fancybox-rails', '~> 0.3.0'
 gem 'gnuplot', '~> 2.6.0'
 gem 'htmlentities', '~> 4.3.0'
 gem 'icalendar', '~> 2.4.0'
-gem 'jquery-rails', '~> 4.3.3'
+gem 'jquery-rails', '~> 4.3.5'
 gem 'jquery-ui-rails', '~> 6.0.0'
 gem 'json', ['~> 1.8.0', '< 2.0.0']
 gem 'holidays', '~> 4.7.0', '< 5.0.0'
@@ -110,7 +110,7 @@ gem 'mail', '~> 2.6.6'
 gem 'maxmind-db', '~> 1.0.0'
 gem 'mahoro', '~> 0.4'
 gem 'newrelic_rpm'
-gem 'nokogiri', '~> 1.10.7'
+gem 'nokogiri', '~> 1.10.8'
 gem 'open4', '~> 1.3.0'
 gem 'rack', '~> 2.0.8'
 gem 'rack-ssl', '~> 1.4.0'
@@ -120,7 +120,7 @@ gem 'rmagick', '~> 2.16.0'
 gem 'rolify', '~> 5.2.0'
 gem 'ruby-msg', '~> 1.5.0', :git => 'https://github.com/mysociety/ruby-msg.git', :branch => 'ascii-encoding'
 gem 'rubyzip', '~> 1.3.0', '< 2.0.0'
-gem 'secure_headers', '~> 3.6.0'
+gem 'secure_headers', '~> 3.9.0'
 gem 'statistics2', '~> 0.54'
 gem 'strip_attributes', :git => 'https://github.com/mysociety/strip_attributes.git', :ref => 'c1c14da'
 gem 'stripe', '~> 3.29.0'
@@ -130,6 +130,7 @@ gem 'vpim', '~> 13.11.11'
 gem 'will_paginate', '~> 3.1.8'
 gem 'xapian-full-alaveteli', '~> 1.2.21.1'
 gem 'xml-simple', '~> 1.1.0', :require => 'xmlsimple'
+gem 'zip_tricks', '~> 5.0.0'
 
 # Gems only used by the research export task
 gem 'gender_detector', '~> 1.0.0'

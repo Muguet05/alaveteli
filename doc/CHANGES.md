@@ -2,17 +2,70 @@
 
 ## Highlighted Features
 
+* Don't show profile photos of banned users (Gareth Rees)
+* Link to change request form when asking users contact us about request email
+  updates (Gareth Rees)
+* Configure Google Analytics to anonymise their IP address and disable storing
+  browser cookies. (Graeme Porteous)
+
+# Upgrade Notes
+
+* The Google Analytics code has been extracted into
+  `views/application/_ga_code.html.erb`, and to avoid the GDPR requirement to
+  show cookie opt-in notices, now sets cookie-less tracking. Additionally, we
+  are instructing Google to anonymise visitors IP address using the
+  `anonymizeIp` option. This means that visitors are no longer individually
+  profiled. If you wish to continue individually targeting users, you'll need
+  to override `app/views/application/_ga_code.html.erb` in your theme and set
+  appropriate options.
+
+# 0.37.1.0
+
+## Highlighted Features
+
+* Fix broken Ubuntu install steps (Gareth Rees)
+
+## Upgrade Notes
+
+* Remove the cosmic preferences in `/etc/apt/preferences` before installing:
+
+```
+Package: *
+Pin: release n=cosmic
+Pin-Priority: 50
+```
+
+# 0.37.0.1
+
+## Highlighted Features
+
+* Updated translations from Transifex (Graeme Porteous)
+* Support plans with a yearly billing interval (Gareth Rees)
+
+# 0.37.0.0
+
+## Highlighted Features
+
 * Automatically run `db:seed` on deployment (Gareth Rees)
+* Highlight the importance of remembering OTP (Gareth Ress)
+* Updated world sites index with new Alaveteli installs (Jen Bramley)
+* Fetch MaxMind database weekly (Sam Pearson)
+* Link requests to news articles through citations (Graeme Porteous)
 * Account for new MaxMind license restrictions (Gareth Rees)
 * Fix HTML output in Zip download correspondence extract (Gareth Rees)
 * Clean up Censor Rule admin forms (Gareth Rees)
 * Improve flow of closing public body change requests (Gareth Rees)
-* Add targeted Pro marketing pages (Myfanwy Nixon, Martin Wright, Gareth Rees)
+* Fix usage statistics for new installations (Graeme Porteous)
 
 ## Highlighted Pro Features
 
+* Respect locale when composing batch request (Gareth Rees)
 * Add configurable `STRIPE_TAX_RATE` to correctly calculate gross amounts for
   Pro plans (Gareth Rees)
+* Improve handling of failed Stripe payments (Graeme Porteous)
+* Add CSV download for batch requests (Graeme Porteous)
+* Add targeted Pro marketing pages (Myfanwy Nixon, Martin Wright, Gareth Rees)
+* Fix embargoed requests email response notification (Graeme Porteous)
 
 ## Upgrade Notes
 
@@ -22,8 +75,23 @@
   `MAXMIND_LICENSE_KEY` in order to continue using the `GEOIP_DATABASE` setting.
   See https://blog.maxmind.com/2019/12/18/significant-changes-to-accessing-and-using-geolite2-databases/
   for more information.
+* There are some database structure updates so remember to run
+  `bundle exec rails db:migrate`
 
 ### Changed Templates
+
+The following templates have been changed. Please update overrides in your theme
+to match the new templates.
+
+    app/views/alaveteli_pro/account_request/index.html.erb
+    app/views/alaveteli_pro/info_request_batches/_info_request_batch.html.erb
+    app/views/alaveteli_pro/info_requests/_sidebar.html.erb
+    app/views/request/_act.html.erb
+    app/views/request/_batch.html.erb
+    app/views/request/_incoming_correspondence.text.erb
+    app/views/request/_sidebar.html.erb
+    app/views/request/show.html.erb
+    app/views/request_mailer/new_response.text.erb
 
 # 0.36.0.2
 
@@ -50,7 +118,7 @@
 * Add Facebook link to blog sidebar (Zarino Zappia)
 * Fix users updated at timestamps being inadvertently changed by background jobs
   (Graeme Porteous)
-* Fixed issue with YAML generated in old Alaveletli versions and stored in
+* Fixed issue with YAML generated in old Alaveteli versions and stored in
   InfoRequestEvent (Graeme Porteous)
 
 ## Highlighted Pro Features

@@ -124,6 +124,8 @@ class User < ApplicationRecord
   has_many :announcement_dismissals,
            :inverse_of => :user,
            :dependent => :destroy
+  has_many :memberships, class_name: 'ProjectMembership'
+  has_many :projects, through: :memberships
 
   scope :active, -> { not_banned.not_closed }
   scope :banned, -> { where.not(ban_text: "") }
@@ -567,6 +569,10 @@ class User < ApplicationRecord
       self.profile_photo = new_profile_photo
       save
     end
+  end
+
+  def show_profile_photo?
+    active? && profile_photo
   end
 
   def about_me_already_exists?
