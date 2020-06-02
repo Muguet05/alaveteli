@@ -1,5 +1,3 @@
-require_dependency 'project/queue/classifiable'
-
 # Extract data from a Project
 class Projects::ExtractsController < Projects::BaseController
   before_action :authenticate, :find_info_request
@@ -27,9 +25,7 @@ class Projects::ExtractsController < Projects::BaseController
   def update
     authorize! :read, @project
 
-    backend =
-      Project::Queue::SessionBackend.primed(session, @project, :extractable)
-    queue = Project::Queue::Extractable.new(@project.info_requests, backend)
+    queue = Project::Queue.extractable(@project, session)
     queue.skip(@info_request)
 
     redirect_to project_extract_path(@project), notice: _('Skipped!')
@@ -66,9 +62,7 @@ class Projects::ExtractsController < Projects::BaseController
         url_title: params[:url_title]
       )
     else
-      backend =
-        Project::Queue::SessionBackend.primed(session, @project, :extractable)
-      @queue = Project::Queue::Extractable.new(@project.info_requests, backend)
+      @queue = Project::Queue.extractable(@project, session)
       @info_request = @queue.next
     end
   end
