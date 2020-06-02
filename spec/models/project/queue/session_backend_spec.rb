@@ -2,14 +2,16 @@ require 'spec_helper'
 
 RSpec.describe Project::Queue::SessionBackend do
   let(:primed_session) do
-    { 'projects' => {
+    {
+      'projects' => {
         '1' => {
           'foo' => {
             'current' => nil,
             'skipped' => []
           }
         }
-      } }
+      }
+    }
   end
 
   let(:backend) do
