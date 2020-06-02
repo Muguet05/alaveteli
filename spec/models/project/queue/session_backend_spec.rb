@@ -20,7 +20,12 @@ RSpec.describe Project::Queue::SessionBackend do
     subject { described_class.primed({}, project, queue_name) }
     let(:project) { double(to_param: '1') }
     let(:queue_name) { :foo }
-    it { is_expected.to eq(described_class.new(primed_session, project_id: '1', queue_name: 'foo')) }
+
+    it do
+      is_expected.to eq(
+        described_class.new(primed_session, project_id: '1', queue_name: 'foo')
+      )
+    end
   end
 
   describe '#current' do
