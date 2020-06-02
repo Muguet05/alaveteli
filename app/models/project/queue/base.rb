@@ -1,11 +1,10 @@
 module Project::Queue
   # Abstract class for Project task queues.
   # Gives the logged in User a new InfoRequest to contribute to.
-  #
-  # Subclasses must implement #info_requests.
+  # Subclasses must override initialize and set the required info_requests
   class Base
-    def initialize(project, backend)
-      @project = project
+    def initialize(info_requests, backend)
+      @info_requests = info_requests
       @backend = backend
     end
 
@@ -26,12 +25,12 @@ module Project::Queue
     end
 
     def ==(other)
-      project == other.project && backend == other.backend
+      info_requests == other.info_requests && backend == other.backend
     end
 
     protected
 
-    attr_reader :project, :backend
+    attr_reader :info_requests, :backend
 
     private
 
@@ -61,10 +60,6 @@ module Project::Queue
 
     def unskipped_requests
       info_requests.where.not(id: backend.skipped)
-    end
-
-    def info_requests
-      raise NotImplementedError
     end
   end
 end
