@@ -100,7 +100,7 @@ RSpec.describe Project::Queue do
     context 'after clearing skipped requests' do
       before do
         info_requests.each { |info_request| queue.skip(info_request) }
-        queue.clear_skipped
+        queue.reset
       end
 
       it { is_expected.to be_a(InfoRequest) }
@@ -127,9 +127,19 @@ RSpec.describe Project::Queue do
     end
   end
 
-  describe '#clear_skipped' do
-    subject { queue.clear_skipped }
-    it { is_expected.to be_empty }
+  describe '#reset' do
+    subject { queue.reset }
+
+    let(:backend) do
+      double(clear_current: nil, clear_skipped: [])
+    end
+
+    before do
+      expect(backend).to receive(:clear_current)
+      expect(backend).to receive(:clear_skipped)
+    end
+
+    it { is_expected.to eq(true) }
   end
 
   describe '#include?' do

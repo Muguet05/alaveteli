@@ -23,8 +23,10 @@ class Project::Queue
     backend.skip(info_request.to_param)
   end
 
-  def clear_skipped
+  def reset
+    backend.clear_current
     backend.clear_skipped
+    true
   end
 
   def include?(info_request)
