@@ -1,12 +1,14 @@
 # Gives the logged in User a new InfoRequest to contribute to.
 class Project::Queue
   def self.classifiable(project, session)
-    backend = SessionBackend.primed(session, project, :classifiable)
+    backend =
+      Project::Queue::SessionBackend.primed(session, project, :classifiable)
     new(project.info_requests.classifiable, backend)
   end
 
   def self.extractable(project, session)
-    backend = SessionBackend.primed(session, project, :extractable)
+    backend =
+      Project::Queue::SessionBackend.primed(session, project, :extractable)
     new(project.info_requests.extractable, backend)
   end
 
